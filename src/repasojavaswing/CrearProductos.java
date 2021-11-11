@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author escor
  */
 public class CrearProductos extends javax.swing.JFrame {
-    private List<Producto> productoList;
+    public static List<Producto> productoList;
     /**
      * Creates new form CrearProductos
      */
@@ -45,7 +45,13 @@ public class CrearProductos extends javax.swing.JFrame {
         botonCrear = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         textFieldEan = new javax.swing.JTextField();
-        botonSalir = new javax.swing.JButton();
+
+        setTitle("crear producto");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -70,14 +76,6 @@ public class CrearProductos extends javax.swing.JFrame {
 
         jLabel5.setText("EAN");
 
-        botonSalir.setBackground(new java.awt.Color(255, 102, 102));
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,11 +91,8 @@ public class CrearProductos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(botonCrear)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonSalir))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(botonCrear, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3)
@@ -137,9 +132,7 @@ public class CrearProductos extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(textFieldEan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCrear)
-                    .addComponent(botonSalir))
+                .addComponent(botonCrear)
                 .addGap(105, 105, 105))
         );
 
@@ -160,17 +153,17 @@ public class CrearProductos extends javax.swing.JFrame {
         try{
             Producto p = new Producto(nombre, marca, tipo, Integer.parseInt(precioCosto),Long.parseLong(ean));
             productoList.add(p);
+            
             JOptionPane.showMessageDialog(null, "Producto creado con Exito!");
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Debe ingresar solo numeros en precio costo y ean","Error",0);
         }
     }//GEN-LAST:event_botonCrearActionPerformed
 
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        VentanaMenu vm = new VentanaMenu();
-        vm.setProductoList(productoList);
-        this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        VentanaMenu.productoList.addAll(productoList);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -206,20 +199,11 @@ public class CrearProductos extends javax.swing.JFrame {
             }
         });
     }
-
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
-    }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrear;
-    private javax.swing.JButton botonSalir;
     private javax.swing.ButtonGroup buttonGroupPerecible;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

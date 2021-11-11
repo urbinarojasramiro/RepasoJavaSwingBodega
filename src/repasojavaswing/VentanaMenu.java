@@ -13,7 +13,7 @@ import java.util.List;
  * @author escor
  */
 public class VentanaMenu extends javax.swing.JFrame {
-    private List<Producto> productoList;
+    public static List<Producto> productoList;
     /**
      * Creates new form VentanaMenu
      */
@@ -85,10 +85,12 @@ public class VentanaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemCrearProdActionPerformed
 
     private void menuItemConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultarActionPerformed
+        
         ConsultarProductos cp = new ConsultarProductos();
         cp.setVisible(true);
-        cp.setProductoList(productoList);
+        ConsultarProductos.productoList.addAll(productoList);
         cp.showProducts();
+        cp.setVisible(true);
     }//GEN-LAST:event_menuItemConsultarActionPerformed
 
     /**
@@ -124,14 +126,6 @@ public class VentanaMenu extends javax.swing.JFrame {
                 new VentanaMenu().setVisible(true);
             }
         });
-    }
-    
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
