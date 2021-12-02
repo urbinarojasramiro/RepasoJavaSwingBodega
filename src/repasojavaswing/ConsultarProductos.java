@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConsultarProductos extends javax.swing.JFrame {
     public static List<Producto> productoList;
+    public static String producto = "";
     
     /**
      * Creates new form ConsultarProductos
@@ -23,6 +24,7 @@ public class ConsultarProductos extends javax.swing.JFrame {
     public ConsultarProductos() {
         initComponents();
         productoList = new ArrayList<Producto>();
+        producto = "";
     }
 
     /**
@@ -36,6 +38,7 @@ public class ConsultarProductos extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
+        labelProducto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,13 +54,17 @@ public class ConsultarProductos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaProductos);
 
+        labelProducto.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelProducto))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -65,7 +72,9 @@ public class ConsultarProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelProducto)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,18 +120,18 @@ public class ConsultarProductos extends javax.swing.JFrame {
         String[] encabezados = {"nombre","marca","tipo", "precioCosto", "ean"};
         String[][] data = new String[productoList.size()][5];
         int i = 0;
-        for (Producto producto : productoList) {
-            data[i][0] = producto.getNombre();
-            data[i][1] = producto.getMarca();
-            data[i][2] = producto.getTipo();
-            data[i][3] = String.valueOf(producto.getPrecioCosto());
-            data[i][4] = String.valueOf(producto.getEan());
+        for (Producto produc : productoList) {
+            data[i][0] = produc.getNombre();
+            data[i][1] = produc.getMarca();
+            data[i][2] = produc.getTipo();
+            data[i][3] = String.valueOf(produc.getPrecioCosto());
+            data[i][4] = String.valueOf(produc.getEan());
             i++;
         }
         
         DefaultTableModel table = new DefaultTableModel(data, encabezados);
         tablaProductos.setModel(table);
-        
+        labelProducto.setText(producto);
         
     }
     
@@ -130,6 +139,7 @@ public class ConsultarProductos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelProducto;
     private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,12 +14,14 @@ import java.util.List;
  */
 public class VentanaMenu extends javax.swing.JFrame {
     public static List<Producto> productoList;
+    public static String producto;
     /**
      * Creates new form VentanaMenu
      */
     public VentanaMenu() {
         initComponents();
         productoList = new ArrayList<Producto>();
+        producto = "";
     }
 
     /**
@@ -89,6 +91,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         ConsultarProductos cp = new ConsultarProductos();
         cp.setVisible(true);
         ConsultarProductos.productoList.addAll(productoList);
+        ConsultarProductos.producto = producto;
         cp.showProducts();
         cp.setVisible(true);
     }//GEN-LAST:event_menuItemConsultarActionPerformed

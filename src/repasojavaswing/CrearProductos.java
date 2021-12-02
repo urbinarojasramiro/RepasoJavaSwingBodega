@@ -15,12 +15,14 @@ import javax.swing.JOptionPane;
  */
 public class CrearProductos extends javax.swing.JFrame {
     public static List<Producto> productoList;
+    public static String producto;
     /**
      * Creates new form CrearProductos
      */
     public CrearProductos() {
         initComponents();
         productoList = new ArrayList<Producto>();
+        producto = "";
     }
 
     /**
@@ -153,6 +155,7 @@ public class CrearProductos extends javax.swing.JFrame {
         try{
             Producto p = new Producto(nombre, marca, tipo, Integer.parseInt(precioCosto),Long.parseLong(ean));
             productoList.add(p);
+            producto = nombre;
             
             JOptionPane.showMessageDialog(null, "Producto creado con Exito!");
         }catch(NumberFormatException e){
@@ -163,6 +166,7 @@ public class CrearProductos extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         VentanaMenu.productoList.addAll(productoList);
+        VentanaMenu.producto = producto;
     }//GEN-LAST:event_formWindowClosing
 
     /**
